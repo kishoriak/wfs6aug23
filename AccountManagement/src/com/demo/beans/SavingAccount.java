@@ -1,5 +1,7 @@
 package com.demo.beans;
 
+import com.demo.exceptions.InsufitientBalanceException;
+
 public class SavingAccount extends Account{
    public String chequebknum;
    public static float int_rate;
@@ -24,6 +26,16 @@ public class SavingAccount extends Account{
 	@Override
 	public String toString() {
 		return super.toString()+"SavingAccount [chequebknum=" + chequebknum + "]";
+	}
+	@Override
+	public void withdraw(double amt) throws InsufitientBalanceException {
+		if(balance-amt>=min_bal) {
+			balance=balance-amt;
+		}
+		else {
+			throw new InsufitientBalanceException("insuffitient balance");
+		}
+		
 	}
 	
 	

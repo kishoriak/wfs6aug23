@@ -3,6 +3,8 @@ package com.demo.test;
 import java.util.Scanner;
 
 import com.demo.beans.Account;
+import com.demo.exceptions.AccountNotFoundException;
+import com.demo.exceptions.InsufitientBalanceException;
 import com.demo.service.AccountService;
 import com.demo.service.AccountServiceImpl;
 
@@ -22,6 +24,26 @@ public class TestAccountMgmt {
 				int ch=sc.nextInt();
 				aservice.addnewAccount(ch);
 				break;
+			case 2:
+				System.out.println("enetr id");
+				String id=sc.next();
+				System.out.println("enetr amount");
+				double amt=sc.nextDouble();
+				boolean status;
+				try {
+					status = aservice.withdrawAmount(id,amt);
+					if(status) {
+						System.out.println("withdrawal done");
+					}
+				} catch (AccountNotFoundException e) {
+					System.out.println(e.getMessage());
+					System.out.println("Account not found");
+					//e.printStackTrace();
+				}catch(InsufitientBalanceException e1) {
+					System.out.println(e1.getMessage());
+				}
+				
+				
 			case 5:
 				Account[] accarr=aservice.getAll();
 				for(Account ac:accarr) {
@@ -30,6 +52,22 @@ public class TestAccountMgmt {
 					System.out.println(ac);
 				}
 				break;
+			case 6:
+				System.out.println("enetr id");
+				 id=sc.next();
+				
+				Account acc;
+				try {
+					acc = aservice.getById(id);
+					if(acc!=null) {
+						System.out.println(acc);
+					}
+				} catch (AccountNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
+					
+					
+			
 			case 8:
 				System.out.println("Thank you for visiting ...");
 				sc.close();

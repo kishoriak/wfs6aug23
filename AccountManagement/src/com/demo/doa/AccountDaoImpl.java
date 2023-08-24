@@ -4,6 +4,8 @@ import com.demo.beans.Account;
 import com.demo.beans.CurrentAccount;
 import com.demo.beans.SavingAccount;
 import com.demo.beans.User;
+import com.demo.exceptions.AccountNotFoundException;
+import com.demo.exceptions.InsufitientBalanceException;
 
 public class AccountDaoImpl implements AccountDao{
    private static Account[] accarr;
@@ -31,6 +33,22 @@ public class AccountDaoImpl implements AccountDao{
 	@Override
 	public Account[] findall() {
 		return accarr;
+	}
+	@Override
+	public Account findById(String id) throws AccountNotFoundException {
+		for(Account ob:accarr) {
+			if(ob==null)
+				break;
+			if(ob.getId().equals(id)) {
+				return ob;
+			}
+		}
+		throw new AccountNotFoundException("No account exists with given id");
+	}
+	@Override
+	public void withdrawMoney(Account acc, double amt) throws InsufitientBalanceException {
+		acc.withdraw(amt);
+		
 	}
 
 }

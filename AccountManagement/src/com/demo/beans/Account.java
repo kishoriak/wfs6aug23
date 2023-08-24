@@ -2,7 +2,9 @@ package com.demo.beans;
 
 import java.util.Arrays;
 
-public class Account {
+import com.demo.exceptions.InsufitientBalanceException;
+
+public abstract class Account {
 	private static int  cnt;
 	static {
 		cnt=0;
@@ -62,5 +64,6 @@ public class Account {
 	public String toString() {
 		return "Account [id=" + id + ", user=" + Arrays.toString(user) + ", balance=" + balance + "]";
 	}
+	public abstract  void withdraw(double amt) throws InsufitientBalanceException;
 	
 }

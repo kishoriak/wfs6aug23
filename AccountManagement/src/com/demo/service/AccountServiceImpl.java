@@ -8,13 +8,16 @@ import com.demo.beans.SavingAccount;
 import com.demo.beans.User;
 import com.demo.doa.AccountDao;
 import com.demo.doa.AccountDaoImpl;
+import com.demo.exceptions.AccountNotFoundException;
+import com.demo.exceptions.InsufitientBalanceException;
+import com.demo.utility.GeneratateDaoObject;
 
 public class AccountServiceImpl implements AccountService{
 	private AccountDao adao;
 	
 
 	public AccountServiceImpl() {
-		adao=new AccountDaoImpl();
+		adao=GeneratateDaoObject.getDaoImpl(1);
 	}
 
 
@@ -62,6 +65,20 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public Account[] getAll() {
 		return adao.findall();
+	}
+
+
+	@Override
+	public Account getById(String id) throws AccountNotFoundException {
+		return adao.findById(id);
+	}
+
+
+	@Override
+	public boolean withdrawAmount(String id, double amt) throws AccountNotFoundException, InsufitientBalanceException {
+		Account acc=adao.findById(id);
+		adao.withdrawMoney(acc,amt);
+		return true;
 	}
 	
 
