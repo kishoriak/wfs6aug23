@@ -2,13 +2,14 @@ package com.demo.test;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.demo.beans.Employee;
 import com.demo.exceptions.EmployeeNotFound;
 import com.demo.service.EmployeeService;
 import com.demo.service.EmployeeServiceImpl;
 
-public class TestEmployeeArraList {
+public class TestEmployeeHashSet {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
@@ -59,26 +60,26 @@ public class TestEmployeeArraList {
 				break;
 			case 6:
 				
-				elist=eservice.sortBySal();
-				elist.forEach(System.out::println);
+				Set<Employee> eset=eservice.sortBySal();
+				eset.forEach(System.out::println);
 				break;
 			case 7:
-				elist=eservice.sortById();
-				elist.forEach(System.out::println);
+				 eset=eservice.sortById();
+				eset.forEach(System.out::println);
 				break;
 			case 8:
-				elist=eservice.sortByName();
-				elist.forEach(System.out::println);
+				eset=eservice.sortByName();
+				eset.forEach(System.out::println);
 				break;	
 			case 9:
-				 elist=eservice.getAll();
+				  eset=eservice.getAll();
 				//java 1.7
 				/*for(Employee e:elist) {
 					System.out.println(e);
 				}*/
 				//java 1.8
 				//elist.forEach(emp->System.out.println(emp));
-				elist.forEach(System.out::println);
+				eset.forEach(System.out::println);
 				break;
 			case 10:
 				sc.close();

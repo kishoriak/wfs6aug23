@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.demo.beans.Employee;
 import com.demo.exceptions.EmployeeNotFound;
@@ -9,7 +10,7 @@ public interface EmployeeService {
 
 	void addnewEmployee();
 
-	List<Employee> getAll();
+	Set<Employee> getAll();
 
 	Employee serachById(int id) throws EmployeeNotFound;
 
@@ -17,10 +18,10 @@ public interface EmployeeService {
 
 	boolean deleteById(int id);
 
-	List<Employee> sortBySal();
+	Set<Employee> sortBySal();
 
-	List<Employee> sortById();
+	Set<Employee> sortById();
 
-	List<Employee> sortByName();
+	Set<Employee> sortByName();
 
 }

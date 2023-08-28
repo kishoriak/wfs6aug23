@@ -3,6 +3,17 @@ package com.demo.beans;
 import java.io.Serializable;
 
 public class Employee implements Serializable{
+	@Override
+	public int hashCode() {
+		System.out.println("hashcode called "+empid);
+		return empid;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		System.out.println("equals called "+empid+"----"+((Employee)obj).empid);
+		return this.empid==((Employee)obj).empid;
+	}
 	private int empid;
 	private String ename;
 	private double sal;

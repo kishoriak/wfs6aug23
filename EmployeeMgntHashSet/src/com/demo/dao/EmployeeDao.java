@@ -1,6 +1,7 @@
 package com.demo.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.demo.beans.Employee;
 import com.demo.exceptions.EmployeeNotFound;
@@ -9,7 +10,7 @@ public interface EmployeeDao {
 
 	void save(Employee employee);
 
-	List<Employee> findAll();
+	Set<Employee> findAll();
 
 	Employee findById(int id) throws EmployeeNotFound;
 
@@ -17,10 +18,10 @@ public interface EmployeeDao {
 
 	boolean removeById(int id);
 
-	List<Employee> sortBySal();
+	Set<Employee> sortBySal();
 
-	List<Employee> sortById();
+	Set<Employee> sortById();
 
-	List<Employee> sortByName();
+	Set<Employee> sortByName();
 
 }

@@ -2,6 +2,7 @@ package com.demo.service;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.demo.beans.Employee;
 import com.demo.dao.EmployeeDao;
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public List<Employee> getAll() {
+	public Set<Employee> getAll() {
 		return edao.findAll();
 	}
 
@@ -52,17 +53,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public List<Employee> sortBySal() {
+	public Set<Employee> sortBySal() {
 		return edao.sortBySal();
 	}
 
 	@Override
-	public List<Employee> sortById() {
+	public Set<Employee> sortById() {
 		return edao.sortById();
 	}
 
 	@Override
-	public List<Employee> sortByName() {
+	public Set<Employee> sortByName() {
 		return edao.sortByName();
 	}
 	

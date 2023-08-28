@@ -6,26 +6,31 @@ public class Employee implements Serializable,Comparable<Employee>{
 	private int empid;
 	private String ename;
 	private double sal;
-
 	public Employee() {
 		super();
 	}
-	public boolean equals(Object ob) {
-		System.out.println("Equals called "+this.empid+"  "+((Employee)ob).empid);
-		return this.empid==((Employee)ob).empid;
-				//&& this.ename.equals(((Employee)ob).ename);
-	}
-	public Employee(int empid) {
-		super();
-		this.empid = empid;
-	}
-
 	public Employee(int empid, String ename, double sal) {
 		super();
 		this.empid = empid;
 		this.ename = ename;
 		this.sal = sal;
 	}
+	public Employee(int empid) {
+		super();
+		this.empid = empid;
+	}
+	@Override
+	public int hashCode() {
+		System.out.println("hashcode called "+empid);
+		return empid;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		System.out.println("equals called "+empid+"----"+((Employee)obj).empid);
+		return this.empid==((Employee)obj).empid;
+	}
+	
 	public int getEmpid() {
 		return empid;
 	}
@@ -50,17 +55,15 @@ public class Employee implements Serializable,Comparable<Employee>{
 	}
 	@Override
 	public int compareTo(Employee o) {
-		//return (int)(this.sal-o.sal);
-		//return this.name.compareTo(o.name)
-		System.out.println("in compareTo sal method "+this.sal+"-------"+o.sal);
-		if(this.sal<o.sal) {
+		if(this.empid<o.empid) {
 			return -1;
 		}
-		else if(this.sal==o.sal) {
+		else if(this.empid==o.empid) {
 			return 0;
-        }
-		else
+		}
+		else {
 			return 1;
+		}
 	}
 	
 
