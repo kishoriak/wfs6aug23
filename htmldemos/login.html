@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="mycss.css"><link>
+    <script src="myjs.js">
+        
+    </script>
+</head>
+<body>
+    <!-- <div style="border:2px solid red;border-radius:6px"> -->
+    <div>
+    
+    <form action="hello" method="post" onsubmit="return validatedata()">
+        Username : <input type="text" id="uname" name="uname" required placeholder="enter user name"/><span id="erruname"></span><br/><br/>
+        Password : <input type="password" id="passwd" name="passwd"/><span id="errpass"></span><br/><br/>
+        <!-- <input type="submit" name="btn" id="btn" value="Login"/>
+        <input type="reset" name="btn" id="btn" value="Login"/> -->
+        <button type="submit" name="btn" id="btn" value="Login">Login</button>
+        <button type="reset" name="btn" id="btn" value="Login">Reset</button>
+
+    </form>
+</div>
+    
+</body>
+</html>

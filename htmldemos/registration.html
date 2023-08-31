@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        function validateCity(){
+           var lst=document.getElementById("city");
+           var ct=lst.options[lst.selectedIndex].value
+           if(ct=="test"){
+            document.getElementById("errcity").innerHTML="pls select the city";
+            return false
+           } 
+           document.getElementById("errcity").innerHTML="";
+           return true;
+        }
+        function validateDegree(){
+            var deg=document.getElementsByName("degree");
+            for(var i=0;i<deg.length;i++){
+                if(deg[i].checked){
+                    document.getElementById("errdegree").innerHTML="";
+                    return true;
+                    
+                }
+            }
+            document.getElementById("errdegree").innerHTML="pls select degree";
+            return false;
+        }
+        function validateskills(){
+            var sk=document.getElementsByName("skills");
+            var cnt=0;
+            for(var i=0;i<sk.length;i++){
+                var str="";
+                if(sk[i].checked){
+                    cnt++;
+                    str+=","+sk[i].value;
+                    if(cnt>=2){
+                        document.getElementById("errskill").innerHTML="";
+                        return true;
+                    }
+                    
+                }
+            }
+            document.getElementById("errskill").innerHTML="pls select minimum  2 skills";
+            return false;
+        }
+        
+        function validatedata(){
+            var flag2=validateskills();
+            var flag1=validateDegree();
+            var flag=validateCity();
+            return flag && flag1 && flag2;
+        }    
+    </script>
+</head>
+<body>
+    <table>
+        <form onsubmit="return validatedata()">
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" name="nm" id="nm" required autofocus minlength="3" maxlength="5"></td>
+        </tr>
+        <tr>
+            <td><label>mobile</label></td>
+            <td><input type="text" name="mob" pattern="[0-9]{10}" id="mob"></td>
+        </tr>
+        <tr>
+            <td><label>Age</label></td>
+            <td><input type="number" name="age"  id="age" min="18" max="60"></td>
+        </tr>
+        <tr>
+            <td><label>Date of booking</label></td>
+            <td><input type="date" name="dt"  id="dt" min="2023-08-15" max="2023-09-15"></td>
+        </tr>
+        <tr>
+            <td><label>gender</label></td>
+            <td><input type="radio" name="gender"  id="male" value="male" checked><label for="male">Male</label> <input type="radio" name="gender"  id="female" value="female"><label for="female">Female</label></td>
+        </tr>
+        <tr>
+            <td><label>Degree</label></td>
+            <td><input type="radio" name="degree"  id="BSC" value="BSC"><label for="BSC">BSC</label><br/><input type="radio" name="degree"  id="Btech" value="Btech"><label for="Btech">Btech</label><br/>
+            <input type="radio" name="degree"  id="Mtech" value="Mtech"> <label for="Mtech">Mtech</label></td>
+            <td id="errdegree"></td>
+        </tr>
+        <tr>
+            <td><label>Skills</label></td>
+            <td><input type="checkbox" name="skills"  id="java" value="java"><label for="java">java</label>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="skills"   value="C#"><label for="C#">C#</label><br/>
+            <input type="checkbox" name="skills"  id="python" value="python"><label for="python">python</label>
+            <input type="checkbox" name="skills"  id="Django" value="Django"><label for="Django">Django</label><br/><input type="checkbox" name="skills"  id="Flask"><label for="Flask">Flask</label>
+            <input type="checkbox" name="skills"  id="Perl" value="flask"><label for="Perl">Perl</label>
+        </td>
+        <td id="errskill"></td>
+        </tr>
+        <tr>
+            <td>City: </td>
+            <td>
+            <select id="city" name="city">
+                <option value="test">----select one----</option>
+                <option value="pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Kolhapur">Kolhapur</option>
+            </select>
+        </td>
+        <td id="errcity"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" name="btn" id="btn" value="submit">Submit</button></td>
+        </tr>
+    </form>
+    </table>
+    
+</body>
+</html>
