@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+	
+	<bean id="hw" class="com.demo.beans.HelloWorld"></bean>
+	
+	<!-- setter injection -->
+	<bean id="u1" class="com.demo.beans.MyUser" autowire="byType">
+	  <property name="uid" value="12"></property>
+	  <property name="uname" value="Rajan"></property>
+	  <property name="mobile" value="222222"></property>
+	  <!-- <property name="address" ref="addr"></property> -->
+	</bean>
+	<bean id="addr" class="com.demo.beans.Address">
+	   <property name="aid" value="1"></property>
+	   <property name="street" value="Baner"></property>
+	   <property name="city" value="Pune"></property>
+	</bean>
+	<bean id="addr1" class="com.demo.beans.Address">
+	   <property name="aid" value="2"></property>
+	   <property name="street" value="Aundh"></property>
+	   <property name="city" value="Pune"></property>
+	</bean>
+	<!-- constructor injection -->
+	<!-- <bean id="u2" class="com.demo.beans.MyUser">
+	   <constructor-arg index="0" value="222"></constructor-arg>
+	   <constructor-arg index="1" value="Revati"></constructor-arg>
+	   <constructor-arg index="2" value="33333"></constructor-arg>
+	</bean> -->
+	
+	
+	
+	
+</beans>
