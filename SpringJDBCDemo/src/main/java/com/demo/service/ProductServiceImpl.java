@@ -4,56 +4,48 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.demo.beans.Product;
 import com.demo.dao.ProductDao;
 
 @Service
-public class ProductServiceImpl implements ProductService {
-	
+public class ProductServiceImpl implements ProductService{
 	@Autowired
-	ProductDao productDao;
+	private ProductDao productDao;
 
-	@Override
-	public int addProduct() {
+	public void addnewProduct() {
 		Scanner sc=new Scanner(System.in);
-		System.out.println("enetr id");
-		int id=sc.nextInt();
-		System.out.println("enetr name");
-		String nm=sc.next();
-		System.out.println("enetr qty");
+		System.out.println("enter product id");
+		int pid=sc.nextInt();
+		System.out.println("enter pname");
+		String pname=sc.next();
+		System.out.println("enter qty");
 		int qty=sc.nextInt();
-		System.out.println("enetr price");
+		System.out.println("enter price");
 		double price=sc.nextDouble();
-		Product p=new Product(id,nm,qty,price);
-		return productDao.save(p);
+		Product p=new Product(pid,pname,qty,price);
+		productDao.save(p);
 	}
 
 	@Override
-	public List<Product> displayAll() {
+	public List<Product> getAll() {
 		return productDao.findAll();
 	}
 
 	@Override
-	public Product getById(int id) throws EmptyResultDataAccessException{
-		return productDao.getById(id);
+	public int deleteById(int pid) {
+		return productDao.removeById(pid);
 	}
 
 	@Override
-	public List<Product> getByPrice(double lpr, double hpr) {
-		return productDao.getByPrice(lpr,hpr);
+	public Product getById(int pid) {
+		return productDao.findById(pid);
 	}
 
 	@Override
-	public boolean deleteById(int id) {
-		return productDao.deleteByID(id);
-	}
-
-	@Override
-	public int updateById(int id, int qty, double pr) {
-		return productDao.updateByID(id,qty,pr);
+	public int modifyById(int pid, String pname, int qty, double pr) {
+		return productDao.updateById(pid,pname,qty,pr);
 	}
 
 }

@@ -5,99 +5,76 @@ import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.demo.beans.Product;
 import com.demo.service.ProductService;
 
 public class TestJDBCDemo {
+
 	public static void main(String[] args) {
-		ApplicationContext ctx=new ClassPathXmlApplicationContext("springcfg.xml");
-		ProductService productService=(ProductService) ctx.getBean("productServiceImpl");
-		int choice=0;
+		ApplicationContext ctx=new ClassPathXmlApplicationContext
+				                  ("applicationcontext.xml");
+		ProductService pservice=(ProductService)ctx.getBean("productServiceImpl");
 		Scanner sc=new Scanner(System.in);
+		int choice=0;
 		do {
-			System.out.println("1. Add Product\n2. Delete product\n3. modify product\n4.display All\n");
-			System.out.println("5. display by id\n 6. display by price\n7. Exit\n");
-			System.out.println("Choice");
-			choice=sc.nextInt();
-			switch(choice) {
-			case 1:
-				int n=productService.addProduct();
-				if(n>0) {
-					System.out.println("insertion done!!");
-				}
-				else {
-					System.out.println("not found");
-				}
-				break;
-			case 2:
-				System.out.println("enetr id");
-				int id=sc.nextInt();
-				boolean status=productService.deleteById(id);
-				if(status) {
-					System.out.println("deleteion done !!");
-				}
-				else {
-					System.out.println("not found");
-				}
-				break;
-			case 3:
-				System.out.println("enetr pid");
-				id=sc.nextInt();
-				System.out.println("enter qty");
-				int qty=sc.nextInt();
-				System.out.println("enter price");
-				double pr=sc.nextDouble();
-				 n=productService.updateById(id,qty,pr);
-				 if(n>0) {
-					 System.out.println("updation done");
-				 }
-				 else {
-					 System.out.println("not found");
-				 }
-				break;
-			case 4:
-				List<Product> plist=productService.displayAll();
-				if(plist!=null)
-					plist.forEach(System.out::println);
-				else
-					System.out.println("not found");
-				break;
-			case 5:
-				System.out.println("enter id");
-				 id=sc.nextInt();
-				try { 
-				Product p=productService.getById(id);
-				   if(p!=null) {
-					System.out.println(p);
-				   }
-				}catch(EmptyResultDataAccessException e) {
-				
-					System.out.println("not found");
-				}
-				break;
-			case 6:
-				System.out.println("enetr low price");
-				double lpr=sc.nextDouble();
-				System.out.println("enetr high price");
-				double hpr=sc.nextDouble();
-				plist=productService.getByPrice(lpr,hpr);
-				if(plist!=null)
-					plist.forEach(System.out::println);
-				else
-					System.out.println("not found");
-				break;
-			case 7:
-				
-				System.out.println("Thank you for visiting");
-				break;
-			default:
-				System.out.println("wrong choice");
-				break;
+		System.out.println("1. Add product\n2. delete product\n3. modify product\n");
+		System.out.println("4. Display all\n5. Display by id\n6. exit\n");
+		choice=sc.nextInt();
+		switch(choice) {
+		case 1:
+			pservice.addnewProduct();
+			break;
+		case 2:
+			System.out.println("enetr pid");
+			int pid=sc.nextInt();
+			int n=pservice.deleteById(pid);
+			if(n>0) {
+				System.out.println("deleted successfully");
 			}
-		}while(choice!=7);
-		
+			else {
+				System.out.println("not found");
+			}
+			break;
+		case 3:
+			System.out.println("enetr pid");
+			 pid=sc.nextInt();
+			 System.out.println("enetr qty");
+			 int qty=sc.nextInt();
+			 System.out.println("enetr price");
+			 double pr=sc.nextDouble();
+			 System.out.println("enetr name");
+			 String pname=sc.next();
+			 n=pservice.modifyById(pid,pname,qty,pr);
+			 if(n>0) {
+				System.out.println("modified successfully");
+			}
+			else {
+				System.out.println("not found");
+			}
+			break;
+			
+		case 4:
+			List<Product> plist=pservice.getAll();
+			plist.forEach(System.out::println);
+			break;
+		case 5:
+			System.out.println("enetr pid");
+			pid=sc.nextInt();
+			Product p=pservice.getById(pid);
+			if(p!=null) {
+				System.out.println(p);
+			}
+			else {
+				System.out.println("not found");
+			}
+			break;
+		case 6:
+			System.out.println("Thank you for visiting....");
+			sc.close();
+		}
+			
+		}while(choice!=6);
 	}
 
 }
